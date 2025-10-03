@@ -44,9 +44,34 @@ app.prepare().then(() => {
     io.emit('viewers', Object.keys(connectedClients).length);
     io.emit('otherBags', Object.values(clientBags));
 
+    // ✅ 기존 장바구니 업데이트
     socket.on('updateBag', (updatedBag) => {
       clientBags[socket.id] = updatedBag;
+      // 기존 코드 유지
       socket.broadcast.emit('otherBags', Object.values(clientBags));
+    });
+
+    // ✅ 주문하기 이벤트 추가
+    socket.on('placeOrder', () => {
+      console.log("📦 placeOrder received from", socket.id);
+
+      const orderSnapshot = {
+        myBag: clientBags[socket.id] || { items: [] },
+        otherBags: Object.entries(clientBags)
+          .filter(([id]) => id !== socket.id)
+          .map(([_, bag]) => bag),
+      };
+
+      console.log("📦 orderSnapshot", orderSnapshot);
+
+      // 주문 완료 이벤트 브로드캐스트
+      io.emit('orderPlaced', orderSnapshot);
+
+      // 주문 후 자기 장바구니 초기화
+      clientBags[socket.id] = { items: [] };
+
+      // 최신 장바구니 상태 다시 공유
+      io.emit('otherBags', Object.values(clientBags));
     });
 
     socket.on('disconnect', () => {

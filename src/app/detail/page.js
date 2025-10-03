@@ -7,11 +7,11 @@ import ImageComponent from "@/components/common/ImageComponent";
 import Line from "@/components/common/Line";
 import Button from '@/components/common/Button';
 import { useBag } from '@/context/BagContext';
-import { menuItems, sideMenus } from '@/constants/datas';
+import { menuItems, noodles, Rice, prepare_dish, sideMenus, drinkMenus } from '@/constants/datas';
 
 const getMenuById = (id) => {
-  return [...menuItems, ...sideMenus].find(item => item.id === id);
-}
+  return [...menuItems, ...noodles, ...Rice, ...prepare_dish, ...sideMenus, ...drinkMenus].find(item => item.id === id);
+};
 
 function DetailContent() {
   const [menuItem, setMenuItem] = useState(null);
@@ -45,17 +45,16 @@ function DetailContent() {
   };
 
   const handleButtonClick = () => {
-    const item = {
-      id: itemId || Date.now(),
-      name: menuItem.name,
-      price: menuItem.price + optionPrice,
-      quantity,
-      options
-    };
     if (bag.items.some(bagItem => bagItem.id === itemId)) {
-      updateItem(itemId, item);
+      updateItem(itemId, {
+        id: itemId,
+        name: menuItem.name,
+        price: menuItem.price,
+        quantity,   // ✅ 수정 반영됨
+        options
+      });
     } else {
-      addItem(item);
+      addItem(menuItem, null, options, quantity); // ✅ 여기서 quantity 전달
     }
     router.push('/bag');
   };
@@ -68,15 +67,22 @@ function DetailContent() {
         <ImageComponent src={menuItem.imageUrl} alt={menuItem.name} />
       </div>
       <div className="container">
-        <Detail_menu_top menuItem={menuItem} basePrice={menuItem.price} onPriceChange={handlePriceChange} />
+        <Detail_menu_top 
+          menuItem={menuItem} 
+          basePrice={menuItem.price}  // ✅ 숫자 그대로 넘기기
+          onPriceChange={handlePriceChange} 
+        />
       </div>
       <Line />
       <div className="container">
-        <Detail_menu_bottom menuItem={menuItem} onOptionChange={(mainPrice, subPrice) => handleOptionChange(mainPrice, subPrice, options)} />
+        <Detail_menu_bottom
+          menuItem={menuItem}
+          onOptionChange={handleOptionChange}
+        />
       </div>
       <div className="bottom__wrapper container">
         <Button className={'main__button'} itemQuantity={quantity} onClick={handleButtonClick}>
-          {totalPrice}원 담기
+          {totalPrice.toLocaleString()}원 담기
         </Button>
       </div>
     </>

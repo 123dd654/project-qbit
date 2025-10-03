@@ -1,13 +1,25 @@
 "use client";
 import Button from "@/components/common/Button";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
+import Lottie from "react-lottie-player";
 import completeAnimation from "/public/complete.json";
-
-const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
+import { useBag } from "@/context/BagContext";
 
 export default function Complete() {
   const router = useRouter();
+  const { finalizeOrder } = useBag();
+
+  // ✅ 메뉴 보기 눌렀을 때 리셋 + 이동
+  const handleMenuPage = () => {
+    finalizeOrder();   // 여기서 리셋
+    router.push("/main");
+  };
+
+  // ✅ 주문내역 보기 눌렀을 때 리셋 + 이동
+  const handleResultPage = () => {
+    finalizeOrder();   // 여기서 리셋
+    router.push("/result");
+  };
 
   return (
     <div className="container">
@@ -32,13 +44,10 @@ export default function Complete() {
       </div>
 
       <div className="bottom__wrapper container">
-        <Button className={"sub__button"} onClick={() => router.push("/main")}>
+        <Button className="sub__button" onClick={handleMenuPage}>
           메뉴 보기
         </Button>
-        <Button
-          className={"main__button"}
-          onClick={() => router.push("/result")}
-        >
+        <Button className="main__button" onClick={handleResultPage}>
           주문내역 보기
         </Button>
       </div>

@@ -31,7 +31,7 @@ const MenuItem = ({ id, label, name, price, imageUrl }) => {
           </div>
         )}
         <div className="menuItem_name">{name}</div>
-        <div className="menuItem_price">{price}원</div>
+        <div className="menuItem_price">{price.toLocaleString()}원</div>
       </div>
       <div className="menuItem_image">
         <Image

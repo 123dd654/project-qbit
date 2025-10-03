@@ -35,28 +35,59 @@
                     flex-direction: column;
                     gap: 4px;
                     
-                    li{
-                        &:nth-child(1){
-                            font-size: 14px;
-                            font-weight: 500;
-                            line-height: 20px;
-                            color: var(--greyscale-color-600);
-                        }
+                    // li{
+                    //     &:nth-child(1){
+                    //         font-size: 14px;
+                    //         font-weight: 500;
+                    //         line-height: 20px;
+                    //         color: var(--greyscale-color-600);
+                    //     }
         
-                        &:nth-child(2){
-                            font-size: 12px;
-                            line-height: 18px;
-                            color: var(--greyscale-color-400);
-                        }
-        
-                        &:nth-child(3){
-                            font-size: 14px;
-                            font-weight: 500;
-                            line-height: 20px;
-                            color: var(--greyscale-color-500);
-                            margin-bottom: 16px;
-                        }
+                    //     &:nth-child(2){
+                    //         font-size: 12px;
+                    //         line-height: 18px;
+                    //         color: var(--greyscale-color-400);
+                    //     }
+
+                    //      &:nth-child(3){
+                    //         font-size: 12px;
+                    //         line-height: 18px;
+                    //         color: var(--greyscale-color-400);
+                    //         margin-bottom: 16px;
+                    //     }
+
+                    //     &:nth-child(3){
+                    //         font-size: 12px;
+                    //         font-weight: 500;
+                    //         line-height: 20px;
+                    //         color: var(--greyscale-color-500);
+                    //         margin-bottom: 16px;
+                    //     }
+                    // }
+
+                    .item_name{
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 20px;
+                        color: var(--greyscale-color-600);
+                        
                     }
+
+                    .item_option{
+                        font-size: 12px;
+                        line-height: 14px;
+                        color: var(--greyscale-color-400);
+                    }
+
+                    .item_price{
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 20px;
+                        color: var(--greyscale-color-500);
+                        margin-bottom: 10px;
+                        margin-top: 10px;
+                    }
+                   
                 }
             }
         }
@@ -113,6 +144,43 @@
         span{
             text-align: center;
         }
+
+        .detail{
+            // display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 24px;
+            
+                ul{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    
+                    .item_name{
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 20px;
+                        color: var(--greyscale-color-600);
+                    }
+
+                    .item_option{
+                        font-size: 12px;
+                        line-height: 14px;
+                        color: var(--greyscale-color-400);
+                    }
+
+                    .item_price{
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 20px;
+                        color: var(--greyscale-color-500);
+                        margin-bottom: 10px;
+                        margin-top: 10px;
+                    }
+                
+                
+            }
+        }
     }
 
     .menu_plus{
@@ -139,3 +207,5 @@
         }
     }
 }
+
+

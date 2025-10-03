@@ -1,9 +1,13 @@
-"use client"
+"use client";
+import { useState } from 'react';
 import Quantity from '../common/Quantity';
 
 const Detail_menu_top = ({ menuItem, basePrice, onPriceChange }) => {
-  const handleQuantityChange = (quantity) => {
-    onPriceChange(basePrice * quantity, quantity);
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(newQuantity);
+    onPriceChange(basePrice * newQuantity, newQuantity);
   };
 
   return (
@@ -11,11 +15,11 @@ const Detail_menu_top = ({ menuItem, basePrice, onPriceChange }) => {
       <h2>{menuItem.name}</h2>
       <p>{menuItem.desc}</p>
       <div className='btn'>
-        <p>{basePrice}원</p>
+        <p>{(basePrice * quantity).toLocaleString()}원</p> {/* ✅ 숫자 금액 */}
         <Quantity onQuantityChange={handleQuantityChange} />
       </div>
     </div>
   );
-}
+};
 
 export default Detail_menu_top;

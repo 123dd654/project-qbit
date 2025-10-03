@@ -1,12 +1,22 @@
+.container.store_fixed{
+  position: sticky;
+  top: 50px;           /* store_fixed 높이만큼 띄워주기 */
+  z-index: 110;
+  background: #fff;    /* 배경 필수 */
+  height: 60px;  
+}
+
 .store_info {
   width: 100%;
   //   min-width: 327px;
   height: 52px;
   @include flex(null, null, space-between, null, null);
   margin: 24px 0 24px 0;
+  
 
   .store_left {
     position: relative;
+    
     .store_info_name {
       font-size: 16px;
       font-weight: bold;

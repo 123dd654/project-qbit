@@ -48,6 +48,7 @@
     padding: 0px 24px;
 }
 
+
 input[type=checkbox] {
     appearance: none;
     width: 24px;
@@ -114,10 +115,14 @@ input[type=radio] {
     color: var(--greyscale-color-000);
     border-radius: 8px;
     cursor: pointer;
-    &:hover {
 
-    }
 }
+
+.main__button.disabled {
+  background-color: #ccc; 
+  cursor: not-allowed;
+}
+
 .sub__button {
     width: 100%;
     min-width: fit-content;
@@ -149,6 +154,7 @@ input[type=radio] {
     color: var(--main-color-500);
     white-space: nowrap;
     cursor: pointer;
+    display: none;
 }
 .etc__button__main {
     min-width: 65px;
@@ -196,10 +202,16 @@ input[type=radio] {
     height: 50px;
     padding: 0px 24px;
     @include flex(row, center, space-between);
+    position: sticky;
+    top: 0;          
+    background: white; 
+    z-index: 120;       
+
     .right__action__buttons {
         width: fit-content;
         height: fit-content;
         @include flex(row, center, flex-end, 8px);
+        margin-left: auto;
         a {
             position: relative;
             .bag_quantity {

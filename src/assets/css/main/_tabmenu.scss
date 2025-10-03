@@ -1,4 +1,12 @@
 // assets/css/style.scss
+.container.tab_fixed{
+  position: sticky;
+  top: 110px;        /* 위 높이만큼 띄워줌 */
+  z-index: 90;
+  background: #fff;
+  min-height: 45px; /* 강제로 높이 부여 */
+}
+
 .tabmenu_container {
   background: linear-gradient(270deg, #ffff 35%, rgba(255, 255, 255, 0) 100%);
   width: 100%;
