@@ -1,12 +1,16 @@
 "use client";
+
 import Line from "@/components/common/Line";
 import My_basket from "@/components/result/My_basket";
 import Your_basket from "@/components/result/Your_basket";
 import { useBag } from "@/context/BagContext";
 import Button from "@/components/common/Button";
 import { useRouter } from "next/navigation";
-import Lottie from "react-lottie-player";
+import dynamic from "next/dynamic";
 import resultAnimation from "/public/result.json";
+
+// Lottie를 SSR(false)로
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 export default function Result() {
   const { result } = useBag();
@@ -14,7 +18,6 @@ export default function Result() {
 
   const goMain = () => router.push("/main");
 
-  // ✅ 주문 내역 없을 때
   if (
     !result ||
     !result.myBag ||
@@ -43,17 +46,14 @@ export default function Result() {
     );
   }
 
-  // ✅ 주문 내역 있을 때 → My_basket, Your_basket로 분리
   return (
     <>
-      {/* 합계 요약 */}
       <div className="container">
         <My_basket myBag={result.myBag} otherBags={result.otherBags} />
       </div>
 
       <Line />
 
-      {/* 상세 주문 내역 */}
       <div className="container">
         <Your_basket myBag={result.myBag} otherBags={result.otherBags} />
       </div>

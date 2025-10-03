@@ -1,23 +1,25 @@
 "use client";
+
 import Button from "@/components/common/Button";
 import { useRouter } from "next/navigation";
-import Lottie from "react-lottie-player";
+import dynamic from "next/dynamic";
 import completeAnimation from "/public/complete.json";
 import { useBag } from "@/context/BagContext";
+
+// Lottie를 SSR(false) 옵션으로 불러오기
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 export default function Complete() {
   const router = useRouter();
   const { finalizeOrder } = useBag();
 
-  // ✅ 메뉴 보기 눌렀을 때 리셋 + 이동
   const handleMenuPage = () => {
-    finalizeOrder();   // 여기서 리셋
+    finalizeOrder();
     router.push("/main");
   };
 
-  // ✅ 주문내역 보기 눌렀을 때 리셋 + 이동
   const handleResultPage = () => {
-    finalizeOrder();   // 여기서 리셋
+    finalizeOrder();
     router.push("/result");
   };
 
